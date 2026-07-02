@@ -23,6 +23,22 @@ describe('br-validations', function(){
 			should(BrV.cnpj.validate('01.781.192/0001-20')).be.false;
 			done();
 		});
+		it('should validate alphanumeric 7S.XPD.GXY/0001-36', function(done) {
+			should(BrV.cnpj.validate('7S.XPD.GXY/0001-36')).be.true;
+			done();
+		});
+		it('should validate alphanumeric TS.3M2.ACA/0001-38', function(done) {
+			should(BrV.cnpj.validate('TS.3M2.ACA/0001-38')).be.true;
+			done();
+		});
+		it('should not validate alphanumeric with wrong check digit', function(done) {
+			should(BrV.cnpj.validate('7S.XPD.GXY/0001-37')).be.false;
+			done();
+		});
+		it('should not validate letters in the check digit positions', function(done) {
+			should(BrV.cnpj.validate('7S.XPD.GXY/0001-3A')).be.false;
+			done();
+		});
 		it('should not validate equal numbers sequence', function(done) {
 			var template = '##.###.###/####-##';
 			for (var i = 0; i < 10; i++) {
